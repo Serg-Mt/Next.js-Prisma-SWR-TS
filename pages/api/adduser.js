@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   console.log(req.body);
   // console.log(req.headers);
   try {
-    const { referer } = req.headers;
+    // const { referer } = req.headers;
     const newUser = await addNewUser(createUserFromFormData(req.body));
     // if (referer) {
     //   console.log('referer', referer);

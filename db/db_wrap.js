@@ -1,16 +1,16 @@
-import { PrismaClient, User } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 const
   prisma = new PrismaClient();
 
 
-export async function getAllUsers(): Promise<User[]> {
+export async function getAllUsers(){
   return await prisma.user.findMany({
     include: { address: true, company: true }
   });
 }
 
-export async function addNewUser({ address, company, ...user }): Promise<User> {
+export async function addNewUser({ address, company, ...user }) {
   return await prisma.user.create({
     data: {
       ...user,
@@ -33,7 +33,13 @@ export async function addNewUser({ address, company, ...user }): Promise<User> {
 //   });
 // }
 
-export async function deleteUser(id: number): Promise<User> {
+
+/**
+ * 
+ * @param  id {number}
+ * @returns 
+ */
+export async function deleteUser(id) {
   return await prisma.user.delete({
     where: { id }
   });
