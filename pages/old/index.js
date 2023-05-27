@@ -1,6 +1,6 @@
-import { SWRConfig } from "swr";
+import { SWRConfig } from 'swr';
 
-import Main from "../../components/Main";
+import Main from '../../components/Main';
 
 export async function getStaticProps() {
   // `getStaticProps` выполняется на стороне сервера.
@@ -11,7 +11,7 @@ export async function getStaticProps() {
         '/api/users': []
       }
     }
-  }
+  };
 }
 
 export default function HomePage({ fallback }) {

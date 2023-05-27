@@ -1,4 +1,4 @@
-import {Email,Img} from './cell-wrappers';
+import {Email} from './cell-wrappers';
 
 const userColumns = [
   { name: 'Name', getVal: obj => obj.name, setVal: (obj, val) => Object.assign(obj, { name: val }) },

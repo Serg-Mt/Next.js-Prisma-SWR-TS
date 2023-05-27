@@ -7,10 +7,10 @@ import Spinner from './Spinner';
 import css from './Main.module.sass';
 import { useRef, useState } from 'react';
 
-const fetcher = url => fetch(url).then(r => r.json())
+const fetcher = url => fetch(url).then(r => r.json());
 
 
-console.log('Друзья, мы с вами в ', typeof navigator !== 'undefined' ? navigator.userAgent : '', typeof process != 'undefined' ? 'Node ' + process?.version : '');
+console.log('Друзья, мы с вами в ', typeof navigator !== 'undefined' ? navigator.userAgent : '', typeof process !== 'undefined' ? 'Node ' + process?.version : '');
 console.log('и только сегодня swr=', swr); // а если без мата? -  то он промолчал 
 const useSWR = swr?.default || swr; // и поэтому вот так
 
@@ -21,7 +21,7 @@ export default function Main() {
   const [inputsVal, setInputsVal] = useState(Array(userColumns.length).fill(''));
   const formRef = useRef(null);
 
-  const { data, error, isLoading, mutate } = useSWR('/api/users', fetcher);
+  const { data, error, isLoading, /* mutate */ } = useSWR('/api/users', fetcher);
   console.log('Main render ', { data, error, isLoading });
 
   if (error) return <div className='error'>ошибка загрузки</div>;
@@ -44,7 +44,7 @@ export default function Main() {
               <ItemTR obj={user} columnList={userColumns} />
               <td>
                 <button onClick={async () => {
-                  let response = await fetch('/api/user/'+user.id, {
+                  const response = await fetch('/api/user/'+user.id, {
                     method: 'DELETE'
                   });
                   console.log('response',response);
@@ -61,18 +61,18 @@ export default function Main() {
             <td>
               <button type="submit" onClick={async () => {
                 try {
-                  let formData = new URLSearchParams(new FormData(formRef.current));
+                  const formData = new URLSearchParams(new FormData(formRef.current));
                   // console.log('FormData:',[...formData.keys()] );
-                  let response = await fetch('/api/adduser', {
+                  const response = await fetch('/api/adduser', {
                     method: 'POST',
                     body: formData
                   });
                   console.log('fetch response', response);
                   setInputsVal([...inputsVal.fill('')]);
                 } catch (error) {
-
+                  null;
                 } finally {
-
+                  null;
                 }
               }
               }>
@@ -84,5 +84,5 @@ export default function Main() {
       </table>
 
     </form>
-  </>
+  </>;
 }

@@ -1,13 +1,13 @@
 // это серверный код для EdgeRuntime
 
-import { addNewUser } from "../../db/db_wrap";
+import { addNewUser } from '../../db/db_wrap';
 
 import userColumns from '../../lib/userColumns';
 
 
 function createUserFromFormData(data) {
-  let user = { id: Math.trunc(1e7 * Math.random()) };
-  Object.keys(data).map(key => userColumns.find(({ name }) => key === name).setVal(user, data[key]))
+  const user = { id: Math.trunc(1e7 * Math.random()) };
+  Object.keys(data).map(key => userColumns.find(({ name }) => key === name).setVal(user, data[key]));
   console.log('user', user);
   return user;
 }
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.log(__filename, error);
-    res.status(500).send({ error })
+    res.status(500).send({ error });
   }
 
 
