@@ -34,7 +34,7 @@ model Address {
 
 model Company {
   id          Int     @id @default(autoincrement())
-  name        String  @unique
+  name        String  
   catchPhrase String?
   bs          String?
   User        User[]

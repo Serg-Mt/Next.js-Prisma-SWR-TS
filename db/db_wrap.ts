@@ -1,39 +1,40 @@
 import { PrismaClient, User } from '@prisma/client';
 
-const 
+const
   prisma = new PrismaClient();
 
 
-export async function getAllUsers():Promise<User[]>{
-    return await prisma.user.findMany({
-      include:{address:true, company:true}
-    });
+export async function getAllUsers(): Promise<User[]> {
+  return await prisma.user.findMany({
+    include: { address: true, company: true }
+  });
 }
 
-export async function addNewUser({address, company, ...user }):Promise<User> {
+export async function addNewUser({ address, company, ...user }): Promise<User> {
   return await prisma.user.create({
-    data: {...user,
-    company: {
-      create: { ...company }
-    },
-    address: {
-      create: { ...address }
-    }
+    data: {
+      ...user,
+      company: {
+        create: { ...company }
+      },
+      address: {
+        create: { ...address }
+      }
     },
     include: { company: true, address: true }
   });
 }
 
-export async function updateUser(user:User):Promise<User>{
-  return await prisma.user.update({
-    where: {id: user.id},
-    data: user,
-    include: { company: true, address: true }
-  });
-}
+// export async function updateUser(user:User):Promise<User>{
+//   return await prisma.user.update({
+//     where: {id: user.id},
+//     data: user,
+//     include: { company: true, address: true }
+//   });
+// }
 
-export async function deleteUser(id:number):Promise<User>{
+export async function deleteUser(id: number): Promise<User> {
   return await prisma.user.delete({
-    where:{id}
+    where: { id }
   });
 }

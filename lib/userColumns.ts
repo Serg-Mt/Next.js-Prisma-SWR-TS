@@ -8,3 +8,20 @@ const userColumns = [
 ];
 
 export default userColumns;
+
+const defaultUser= {
+  name:'',
+  username:'',
+  email:'',
+  phone:'',
+  website:'',
+  company:{name:'',catchPhrase:'',bs:''},
+  address:{street:'',suite:'',city:'',zipcode:''}
+};
+
+export function createUserFromFormData(data) {
+  const user = { id: Math.trunc(1e7 * Math.random()) };
+  Object.keys(data).map(key => userColumns.find(({ name }) => key === name).setVal(user, data[key]));
+  // console.log('user', user);
+  return Object.assign({}, defaultUser, user );
+}
